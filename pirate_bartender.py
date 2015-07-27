@@ -1,4 +1,4 @@
-#Bartender app. Creating a drink according to users preference.
+#Bartender app. Creating drinks according to customers preferences.
 import random
 
 qualities=("strong", "salty", "bitter", "sweet", "fruity")
@@ -41,8 +41,6 @@ def drink ():
 
 def main ():
     print"Welcome to XXXX bar. I do not want to support over consumption of alcohol. Therefore, I will offer only one drink for a customer. We shall finish working when there are no more customers to serve." 
-    #deserves_a_drink = raw_input("Are you a customer? yes/no")
-    #deserves_a_drink = str_to_bol(des)
     first_iteration = True 
     while True:
         if first_iteration: 
