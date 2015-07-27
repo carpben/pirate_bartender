@@ -11,22 +11,15 @@ ingredients = {
 }
 
 def questions():
-    users_pref = {
-        "strong": False,
-        "salty": False,
-        "bitter": False,
-        "sweet": False,
-        "fruity": False
-    }
+    users_pref = {}
     for quality in qualities:
-        while True: 
-            like=raw_input ("Do you like your drink {}? (yes/no)".format(quality))
-            if like =="yes" or like == "no":  
-                if like == "yes":
-                    users_pref[quality]=True
-                break
-            else: 
-                print "Please enter yes/no." 
+        like = raw_input("Do you like your drink %r? (yes/no)   " % quality).lower()
+        while like not in ["y", "yes", "n", "no"]: 
+            like = raw_input("Please enter yes/no   ")
+        if like in ["y", "yes"]:
+            users_pref[quality]=True
+        else:
+            users_pref[quality]=False
     return users_pref
 
 def construct_drink (users_pref):
