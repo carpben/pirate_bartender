@@ -10,42 +10,53 @@ ingredients = {
     "fruity": ("slice of orange", "dash of cassis", "cherry on top")
 }
 
+def str_to_bol(ans):
+    ans=ans.lower()
+    while ans not in ["y", "yes", "n", "no"]:    
+        ans=raw_input("Please enter yes/no.  ")
+    if ans in ["y", "yes"]:
+        return True
+    else: 
+        return False
+
 def questions():
     users_pref = {}
     for quality in qualities:
-        like = raw_input("Do you want your drink %r? (yes/no)   " % quality).lower()
-        while like not in ["y", "yes", "n", "no"]: 
-            like = raw_input("Please enter yes/no   ")
-        users_pref[quality] = like in ["y", "yes"]
+        wanted = raw_input("Do you want your drink %r? (yes/no)   " % quality).lower()
+        users_pref[quality] = str_to_bol(wanted)
     return users_pref
 
 def construct_drink (users_pref):
-    drink=[]
+    recipe=[]
     for quality in users_pref:
         if users_pref[quality]:
-            drink.append(random.choice(ingredients[quality]))
-    return drink
+            recipe.append(random.choice(ingredients[quality]))
+    return recipe
 
 def drink ():
-    print(construct_drink(questions()))  
-    #This will first run question, than provide return to construnct drink function, than print the result
+    recipe=construct_drink(questions())  
+    print "One drink coming up. It includes:"
+    for ingrident in recipe: 
+        print "      " + ingrident
 
 def main ():
-    print"Welcome to XXXX bar. I do not want to support over consumption of alcohol. Therefor I will offer only one drink for a customer." 
+    print"Welcome to XXXX bar. I do not want to support over consumption of alcohol. Therefore, I will offer only one drink for a customer. We shall finish working when there are no more customers to serve." 
+    #deserves_a_drink = raw_input("Are you a customer? yes/no")
+    #deserves_a_drink = str_to_bol(des)
     first_iteration = True 
     while True:
         if first_iteration: 
-            print "Are you a customer?"
+            deserves_a_drink = raw_input ("Are you a customer? yes/no   ")
+            first_iteration=False
         else:
-            print "Are you a new customer?"
-        wants_a_drink = raw_input ("Yes/no")
-        while wants_a_drink not in ["y", "yes", "n", "no"]: 
-            wants_a_drink = raw_input("Please enter yes/no   ")
-        if wants_a_drink in ["y", "yes"]: 
-            drink ()
-        else: 
+            deserves_a_drink = raw_input ("Are you a new customer? yes/no   ")
+        deserves_a_drink = str_to_bol(deserves_a_drink)
+        if not deserves_a_drink: 
             break
-        first_iteration=False
-    
+        wants_a_drink = raw_input("Do you want a drink? yes/no  ")
+        wants_a_drink = str_to_bol(wants_a_drink)
+        if wants_a_drink:
+            drink()
+        
 if __name__ == '__main__':
     main()
